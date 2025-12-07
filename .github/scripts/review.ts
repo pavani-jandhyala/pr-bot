@@ -156,8 +156,14 @@ async function postReview(prNumber: number, review: AIReviewOutput) {
         repo: REPO,
         pull_number: prNumber,
         body: review.summary,
-        event: comments.length > 0 ? 'COMMENT' : 'APPROVE',
-        comments: comments,
+        event: review.comments.length > 0 ? 'COMMENT' : 'APPROVE',
+        comments: review.comments.map(c => ({
+            // Use the required fields directly
+            path: c.path,
+            position: c.position, 
+            body: c.body,
+            // Ensure no extra properties creep in here
+        })),
     });
     
     console.log('Review posted successfully!');
