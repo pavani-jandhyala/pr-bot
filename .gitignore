@@ -1,0 +1,56 @@
+# ------------------------------------
+# 1. Dependency Directories
+# ------------------------------------
+# Dependencies installed via npm
+/node_modules
+
+# pnpm-store
+/pnpm-lock.yaml
+/pnpm-store/
+
+# Yarn files
+/yarn-debug.log*
+/.yarn-integrity
+/package-lock.json
+
+# ------------------------------------
+# 2. Build Artifacts
+# ------------------------------------
+# TypeScript/JavaScript compiled output
+# Assuming your tsconfig.json outDir is 'dist'
+/dist
+
+# Generated declaration files
+# *.d.ts
+/out
+/build
+/lib
+
+# ------------------------------------
+# 3. OS and IDE Generated Files
+# ------------------------------------
+.DS_Store # macOS generated files
+.env # Local environment variables (CRITICAL SECURITY)
+.env.* # All variants of .env files
+.vscode/ # VS Code settings
+.idea/ # IntelliJ/WebStorm settings
+*.sublime-workspace # Sublime Text workspace
+
+# Logs and Lockfiles
+npm-debug.log*
+npm-error.log*
+*.log
+*.tgz
+
+# ------------------------------------
+# 4. TypeScript Specific
+# ------------------------------------
+# TypeScript cache file
+/.tsbuildinfo
+
+# ------------------------------------
+# 5. Testing/Coverage
+# ------------------------------------
+/coverage
+/.nyc_output
+/test-results.xml

@@ -1,0 +1,36 @@
+name: AI Pull Request Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
+jobs:
+  ai_review:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pull-requests: write
+      contents: read 
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+        # fetch-depth: 0 is commented out, relying on Octokit in the script
+
+      - name: ⚙️ Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install TypeScript and Dependencies
+        # ➡️ CHANGE: Using @google/genai instead of openai
+        run: npm install @octokit/rest @google/genai typescript ts-node @types/node
+
+      - name: 🤖 Run AI Review Script (TypeScript)
+        run: ts-node .github/scripts/review.ts 
+        env:
+          # ➡️ CHANGE: Reference the new secret name GEMINI_API_KEY
+          LLM_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}

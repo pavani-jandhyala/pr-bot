@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    /* Base Options: */
+    "target": "es2020",                       /* Specify ECMAScript target version */
+    "module": "commonjs",                     /* Specify module code generation */
+    "rootDir": "./",                          /* Specify the root directory of source files */
+    "outDir": "./dist",                       /* Specify output directory for compiled JS */
+    
+    /* Type Checking: */
+    "strict": true,                           /* Enable all strict type-checking options (RECOMMENDED) */
+    
+    /* Module Resolution: */
+    "esModuleInterop": true,                  /* Allows 'import * as fs from "fs"' */
+    "skipLibCheck": true,                     /* Skip type checking of declaration files */
+    "forceConsistentCasingInFileNames": true, /* Ensure consistent file naming */
+  },
+  "include": ["**/*.ts"],                     /* Only compile .ts files */
+  "exclude": ["node_modules"]                 /* Ignore node_modules directory */
+}

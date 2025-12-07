@@ -1,0 +1,30 @@
+{
+  "name": "pr-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavani-jandhyala/pr-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pavani-jandhyala/pr-bot/issues"
+  },
+  "homepage": "https://github.com/pavani-jandhyala/pr-bot#readme",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@google/genai": "^1.31.0",
+    "@octokit/rest": "^22.0.1"
+  }
+}
