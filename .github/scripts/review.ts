@@ -12,8 +12,8 @@ const MODEL_NAME = 'gemini-2.5-pro';
 const BOT_NAME = 'AI Code Reviewer (Powered by Gemini)';
 
 // --- Environment Variables from GitHub Actions ---
-// ➡️ CHANGE: Expecting GEMINI_API_KEY from GitHub secrets
-const LLM_API_KEY = process.env.GEMINI_API_KEY!; 
+// ➡️ CHANGE: Expecting LLM_API_KEY from GitHub secrets
+const LLM_API_KEY = process.env.LLM_API_KEY!; 
 const PR_NUMBER = parseInt(process.env.PR_NUMBER!, 10);
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
 const REPOSITORY = process.env.GITHUB_REPOSITORY!;
@@ -168,9 +168,9 @@ async function postReview(prNumber: number, review: AIReviewOutput) {
  */
 async function main() {
   try {
-    // ➡️ Check for the new GEMINI_API_KEY environment variable
+    // ➡️ Check for the new LLM_API_KEY environment variable
     if (!LLM_API_KEY || !PR_NUMBER || !GITHUB_TOKEN || !REPOSITORY) {
-      throw new Error('Missing environment variables. Check GEMINI_API_KEY, PR_NUMBER, GITHUB_TOKEN, and GITHUB_REPOSITORY.');
+      throw new Error('Missing environment variables. Check LLM_API_KEY, PR_NUMBER, GITHUB_TOKEN, and GITHUB_REPOSITORY.');
     }
 
     const guidelines = readFileSync(GUIDELINES_FILE_PATH, 'utf-8');
