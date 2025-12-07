@@ -8,7 +8,7 @@ import { GoogleGenAI } from '@google/genai';
 // --- Configuration ---
 const GUIDELINES_FILE_PATH = 'CODING_GUIDELINES.md'; 
 // ➡️ CHANGE: Using a capable Gemini model
-const MODEL_NAME = 'gemini-2.5-pro'; 
+const MODEL_NAME = 'gemini-2.5-flash'; 
 const BOT_NAME = 'AI Code Reviewer (Powered by Gemini)';
 
 // --- Environment Variables from GitHub Actions ---
