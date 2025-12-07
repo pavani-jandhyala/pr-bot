@@ -8,12 +8,12 @@ import { GoogleGenAI } from '@google/genai';
 // --- Configuration ---
 const GUIDELINES_FILE_PATH = 'CODING_GUIDELINES.md'; 
 // ➡️ CHANGE: Using a capable Gemini model
-const MODEL_NAME = 'gemini-2.5-pro'; 
+const MODEL_NAME = 'gemini-2.5-flash'; 
 const BOT_NAME = 'AI Code Reviewer (Powered by Gemini)';
 
 // --- Environment Variables from GitHub Actions ---
-// ➡️ CHANGE: Expecting GEMINI_API_KEY from GitHub secrets
-const LLM_API_KEY = process.env.GEMINI_API_KEY!; 
+// ➡️ CHANGE: Expecting LLM_API_KEY from GitHub secrets
+const LLM_API_KEY = process.env.LLM_API_KEY!; 
 const PR_NUMBER = parseInt(process.env.PR_NUMBER!, 10);
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
 const REPOSITORY = process.env.GITHUB_REPOSITORY!;
@@ -156,8 +156,14 @@ async function postReview(prNumber: number, review: AIReviewOutput) {
         repo: REPO,
         pull_number: prNumber,
         body: review.summary,
-        event: comments.length > 0 ? 'COMMENT' : 'APPROVE',
-        comments: comments,
+        event: review.comments.length > 0 ? 'COMMENT' : 'APPROVE',
+        comments: review.comments.map(c => ({
+            // Use the required fields directly
+            path: c.path,
+            position: c.position, 
+            body: c.body,
+            // Ensure no extra properties creep in here
+        })),
     });
     
     console.log('Review posted successfully!');
@@ -168,9 +174,9 @@ async function postReview(prNumber: number, review: AIReviewOutput) {
  */
 async function main() {
   try {
-    // ➡️ Check for the new GEMINI_API_KEY environment variable
+    // ➡️ Check for the new LLM_API_KEY environment variable
     if (!LLM_API_KEY || !PR_NUMBER || !GITHUB_TOKEN || !REPOSITORY) {
-      throw new Error('Missing environment variables. Check GEMINI_API_KEY, PR_NUMBER, GITHUB_TOKEN, and GITHUB_REPOSITORY.');
+      throw new Error('Missing environment variables. Check LLM_API_KEY, PR_NUMBER, GITHUB_TOKEN, and GITHUB_REPOSITORY.');
     }
 
     const guidelines = readFileSync(GUIDELINES_FILE_PATH, 'utf-8');
