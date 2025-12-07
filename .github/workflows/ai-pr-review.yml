@@ -27,7 +27,7 @@ jobs:
         run: npm install @octokit/rest @google/genai typescript ts-node @types/node
 
       - name: 🤖 Run AI Review Script (TypeScript)
-        run: ts-node .github/scripts/review.ts 
+        run: npx ts-node .github/scripts/review.ts 
         env:
           # ➡️ CHANGE: Reference the new secret name GEMINI_API_KEY
           LLM_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
